@@ -1,0 +1,78 @@
+﻿@page "Employees/view/{id:min(1)}" 
+@* @*id:range(1,100) min(1):max(100) even:min(2)*@
+@model EmployeeManagememt.Pages.Employees.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+    var photoPath = "~/images/" + (Model.Employee.PhotoPath ?? "david.png");
+}
+
+
+<h1>Details</h1>
+
+<div class="row justify-content-center m-3">
+   @*  @if(!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="col-sm-8">
+            <div class="alert alert-primary">
+                @Model.Message
+            </div>
+        </div>
+    } *@
+@* 
+    //Print denotificação temporária
+    @if (TempData["message"]!= null)
+    {
+        <div class="col-sm-8">
+            <div class="alert alert-primary">
+                @TempData["message"]
+            </div>
+        </div>
+    } *@
+
+    @*
+
+    //Print de notificação mantem a sms na notificação
+    @if (TempData.Peek("message")!= null)
+    {
+        <div class="col-sm-8">
+            <div class="alert alert-primary">
+            @TempData.Peek("message")
+            </div>
+        </div>
+    } *@
+    @if (Model.Message != null)
+    {
+        <div class="col-sm-8">
+            <div class="alert alert-primary">
+                @Model.Message
+            </div>
+        </div>
+    }
+    <div class="col-sm-8">
+        @* @await Component.InvokeAsync("HeadCount") *@
+       @*  @await Component.InvokeAsync("HeadCount", new{ department=Model.Employee.Department}) *@
+       <vc:head-count  department-name="@Model.Employee.Department"></vc:head-count>
+    </div>
+
+
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Employee.Name</h1>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top" src="@photoPath" asp-append-version="true" />
+                <h4>Employee Id : @Model.Employee.Id</h4>
+                <h4>Email : @Model.Employee.Email</h4>
+                <h4>Department : @Model.Employee.Department</h4>
+
+            </div>
+            <div class="card-footer text-center">
+                <a asp-page="index" class="btn btn-primary">Back</a>
+                <a href="#" class="btn btn-primary"> Edit</a>
+                <a href="#" class="btn btn-danger"> Delete</a>
+            </div>
+        </div>
+    </div>
+
+</div>

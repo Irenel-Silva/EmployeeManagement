@@ -1,0 +1,17 @@
+﻿@page "{id}"
+@model EmployeeManagememt.Pages.Employees.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+    ViewData["ShowButtons"] = false;
+}
+<h1> Delete Confirmation</h1>
+<div class=" alert alert-danger">
+    <partial name="_DisplayEmployeePartial" model="Model.employee" view-data="ViewData" />
+    <h5> Are you sure , you want delete this employee - @Model.employee.Name</h5>
+    <form method="post">
+        <div>
+            <button type="submit" class="btn btn-danger">Yes</button>
+            <a class=" btn btn-primary" asp-page="/Employees/Index">No</a>
+        </div>
+    </form>
+</div>
